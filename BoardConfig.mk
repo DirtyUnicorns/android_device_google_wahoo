@@ -28,10 +28,13 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a73
 
-BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME) androidboot.console=ttyMSM0,115200,n8
-BOARD_KERNEL_CMDLINE += earlycon=msm_serial_dm,0xc1b0000 enforcing=0 androidboot.selinux=permissive lpm_levels.sleep_disabled=1
-BOARD_KERNEL_CMDLINE += user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 service_locator.enable=1
-BOARD_KERNEL_CMDLINE += swiotlb=2048 firmware_class.path=/vendor/firmware loop.max_part=7 raid=noautodetect
+BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME) androidboot.console=ttyMSM0 lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE += service_locator.enable=1
+BOARD_KERNEL_CMDLINE += swiotlb=2048
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
+BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE += raid=noautodetect
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
@@ -47,10 +50,6 @@ endif
 
 TARGET_NO_BOOTLOADER ?= true
 TARGET_NO_KERNEL := false
-AB_OTA_UPDATER := true
-AB_OTA_PARTITIONS := \
-  boot \
-  system
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
@@ -70,7 +69,9 @@ BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_USERIMAGES_USE_EXT4 := true
+# DTBO partition definitions
+BOARD_PREBUILT_DTBOIMAGE := device/google/wahoo-kernel/dtbo.img
+BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 TARGET_COPY_OUT_VENDOR := vendor
 
@@ -90,7 +91,6 @@ BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/wahoo/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/wahoo/sepolicy/private
 BOARD_SEPOLICY_DIRS += device/google/wahoo/sepolicy/verizon
 
-BOARD_SEPOLICY_DIRS += device/google/taimen/sepolicy
 TARGET_ANDROID_FILESYSTEM_CONFIG_H := device/google/wahoo/android_filesystem_config.h
 
 QCOM_BOARD_PLATFORMS += msm8998

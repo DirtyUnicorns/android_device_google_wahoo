@@ -97,7 +97,9 @@ AB_OTA_UPDATER := true
 
 AB_OTA_PARTITIONS += \
     boot \
-    system
+    system \
+    vbmeta \
+    dtbo
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -388,9 +390,6 @@ PRODUCT_PACKAGES += \
 # VR HAL
 PRODUCT_PACKAGES += \
     android.hardware.vr@1.0-service.wahoo \
-# Self Extractor blobs that can be built
-PRODUCT_PACKAGES += \
-    com.android.ims.rcsmanager
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
